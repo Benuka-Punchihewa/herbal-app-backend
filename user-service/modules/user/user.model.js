@@ -6,6 +6,7 @@ const UserModel = mongoose.Schema(
     auth: {
       type: String,
       required: true,
+      unique: true,
     },
     name: {
       type: String,

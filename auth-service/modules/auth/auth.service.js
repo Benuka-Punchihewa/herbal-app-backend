@@ -1,3 +1,5 @@
-const save = async () => {
+const save = async (auth) => {
   return auth.save();
 };
+
+module.exports = { save };

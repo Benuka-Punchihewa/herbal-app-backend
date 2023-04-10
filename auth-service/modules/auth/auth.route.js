@@ -6,7 +6,7 @@ const AuthController = require("./auth.controller");
 const router = express.Router();
 
 // register
-router.post("/", AuthController.register);
+router.post("/register", AuthController.register);
 
 // authorize
 router.post(

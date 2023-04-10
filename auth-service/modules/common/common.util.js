@@ -12,11 +12,11 @@ const connectDB = async (database_url) => {
   mongoose.connect(database_url);
 };
 
-const getAxiosInsance = () => {
+const getAxiosInsance = (baseURL) => {
   return axios.create({
-    baseURL: constants.API_BASE_URL,
+    baseURL: baseURL,
     headers: {
-      Authorization: "Bearer " + process.env.SERVICE_ACCESS_TOKEN,
+      // Authorization: "Bearer " + process.env.SERVICE_ACCESS_TOKEN,
       "Content-Type": "application/json",
     },
   });
@@ -28,17 +28,17 @@ const buildAxiosResponse = async (success, data, statusCode) => {
   } else {
     switch (statusCode) {
       case StatusCodes.BAD_REQUEST:
-        throw new BadRequestError(data.message);
+        throw new BadRequestError(data.message, data.data);
       case StatusCodes.CONFLICT:
-        throw new ConflictError(data.message);
+        throw new ConflictError(data.message, data.data);
       case StatusCodes.FORBIDDEN:
-        throw new ForbiddenError(data.message);
+        throw new ForbiddenError(data.message, data.data);
       case StatusCodes.INTERNAL_SERVER_ERROR:
-        throw new InternalServerError(data.message);
+        throw new InternalServerError(data.message, data.data);
       case StatusCodes.NOT_FOUND:
-        throw new NotFoundError(data.message);
+        throw new NotFoundError(data.message, data.data);
       case StatusCodes.UNAUTHORIZED:
-        throw new UnauthorizedError(data.message);
+        throw new UnauthorizedError(data.message, data.data);
       default:
         throw new UnauthorizedError("Something Went Wrong!");
     }

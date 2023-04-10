@@ -75,4 +75,15 @@ const authorize = (authHeader, accessRole) => {
   }
 };
 
-module.exports = { signToken, generatedServiceToken, extractToken, authorize };
+const getEncryptedPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(password, salt);
+};
+
+module.exports = {
+  signToken,
+  generatedServiceToken,
+  extractToken,
+  authorize,
+  getEncryptedPassword,
+};

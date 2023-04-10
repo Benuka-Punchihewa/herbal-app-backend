@@ -15,6 +15,7 @@ const CommonUtil = require("./modules/common/common.util");
 const constants = require("./constants");
 
 // import routes
+const AuthRoutes = require("./modules/auth/auth.route");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(cors());
 
 // define routes
+app.use(constants.API.PREFIX.concat("/auth"), AuthRoutes);
 
 // not found route
 app.use((req, res, next) => {
@@ -30,6 +32,12 @@ app.use((req, res, next) => {
 
 // error handler middleware
 app.use(errorHandlerMiddleware);
+
+console.log(
+  require("./modules/auth/auth.util").generatedServiceToken(
+    constants.ACCESS.SERVICE_IDS.AUTH
+  )
+);
 
 /**
  * connect to database and run application on defined port

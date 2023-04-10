@@ -33,11 +33,8 @@ app.use((req, res, next) => {
 // error handler middleware
 app.use(errorHandlerMiddleware);
 
-console.log(
-  require("./modules/auth/auth.util").generatedServiceToken(
-    constants.ACCESS.SERVICE_IDS.AUTH
-  )
-);
+
+console.log(require("./modules/auth/auth.util").generatedServiceToken());
 
 /**
  * connect to database and run application on defined port

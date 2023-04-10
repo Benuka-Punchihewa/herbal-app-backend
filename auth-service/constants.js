@@ -10,12 +10,6 @@ const constants = {
       CUSTOMER: "customer",
       SERVICE: "service",
     },
-    SERVICE_IDS: {
-      AUTH: "auth",
-      USER: "user",
-      ORDER: "order",
-      PRODUCT: "product",
-    },
   },
 };
 

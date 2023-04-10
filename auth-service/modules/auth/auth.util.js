@@ -17,9 +17,8 @@ const signToken = (user) => {
   });
 };
 
-const generatedServiceToken = (serviceId) => {
+const generatedServiceToken = () => {
   const tokenBody = {
-    _id: serviceId,
     accessRole: constants.ACCESS.ROLES.SERVICE,
   };
 

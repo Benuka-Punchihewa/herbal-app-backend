@@ -16,7 +16,7 @@ const getAxiosInsance = (baseURL) => {
   return axios.create({
     baseURL: baseURL,
     headers: {
-      // Authorization: "Bearer " + process.env.SERVICE_ACCESS_TOKEN,
+      Authorization: "Bearer " + process.env.SERVICE_ACCESS_TOKEN,
       "Content-Type": "application/json",
     },
   });

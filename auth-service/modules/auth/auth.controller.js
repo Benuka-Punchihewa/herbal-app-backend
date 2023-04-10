@@ -22,9 +22,9 @@ const register = async (req, res) => {
 
   // create user document
   const user = await UserService.createUser({
-    // auth: {
-    //   _id: dbAuth._id,
-    // },
+    auth: {
+      _id: dbAuth._id,
+    },
     name,
     address,
     contactNumber,

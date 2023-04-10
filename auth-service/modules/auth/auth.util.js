@@ -57,12 +57,12 @@ const authorize = (authHeader, accessRole) => {
       tokenPayload: payload,
       user: undefined,
     };
-
+    console.log(payload);
     // access request from user token
-    if (payload.access_role !== constants.ACCESS.ROLES.SERVICE) {
+    if (payload.accessRole !== constants.ACCESS.ROLES.SERVICE) {
       // access role validation
-      if (!accessRole.includes(payload.access_roles))
-        throw new UnauthorizedError(
+      if (!accessRole.includes(payload.accessRole))
+        throw new ForbiddenError(
           `You're unauthorized to access this resource!`
         );
 

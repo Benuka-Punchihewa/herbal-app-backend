@@ -8,6 +8,8 @@ const errorHandlerMiddleware = async (err, req, res, next) => {
     data: {},
   };
 
+  console.log(err);
+
   // handle internal server errors
   if (
     err instanceof InternalServerError ||

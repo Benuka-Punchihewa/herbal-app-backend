@@ -1,17 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const InternalServerError = require("./error.classes/InternalServerError");
-const CommonUtil = require("../common/common.util");
 
-/**
- *
- * @param {*} err
- * @param {*} req
- * @param {*} res
- * @param {*} next
- * @returns {{message: "Some Error Message", data: {key: "value"}}}
- *
- * Handles errors passed to the middleware and sends the JSON error response.
- */
 const errorHandlerMiddleware = async (err, req, res, next) => {
   let customError = {
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
@@ -19,8 +8,7 @@ const errorHandlerMiddleware = async (err, req, res, next) => {
     data: {},
   };
 
-  // log errors
-  CommonUtil.logger(customError);
+  console.log(err);
 
   // handle internal server errors
   if (

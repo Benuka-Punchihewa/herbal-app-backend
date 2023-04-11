@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+  labels:
+    app: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+        - name: user
+          image: user-service:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5001
+          env:
+            - name: MONGO_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: user-config
+                  key: mongo-url
+            - name: SERVICE_ACCESS_TOKEN
+              valueFrom:
+                configMapKeyRef:
+                  name: user-config
+                  key: service-access-token
+            - name: AUTH_SERVICE_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: user-config
+                  key: auth-service-base-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user
+  ports:
+    - protocol: TCP
+      port: 5002
+      targetPort: 5001

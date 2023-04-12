@@ -12,4 +12,10 @@ router.post(
   UserController.createUser
 );
 
+router.get(
+  "/auth/:authId",
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.SERVICE]),
+  UserController.findByAuthId
+);
+
 module.exports = router;

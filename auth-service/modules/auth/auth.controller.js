@@ -4,7 +4,9 @@ const Auth = require("./auth.model");
 const AuthService = require("./auth.service");
 const UserService = require("../user/user.service");
 const constants = require("../../constants");
+const bcrypt = require("bcryptjs");
 const BadRequestError = require("../error/error.classes/BadRequestError");
+const NotFoundError = require("../error/error.classes/NotFoundError");
 
 const register = async (req, res) => {
   const { email, name, address, contactNumber, role, password } = req.body;
@@ -40,4 +42,36 @@ const authorize = async (req, res) => {
   return res.status(StatusCodes.OK).json(returnBody);
 };
 
-module.exports = { register, authorize };
+const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  // validations
+  if (!password || !email)
+    throw new BadRequestError("Both Email & Password are Required!");
+
+  // check for existence
+  const dbAuth = await AuthService.findById(email);
+  if (!dbAuth) throw new NotFoundError("User Account Not Found!");
+
+  //compare the passwords
+  const passwordCompare = await bcrypt.compare(
+    password,
+    String(dbAuth.password)
+  );
+  if (!passwordCompare) throw new UnauthorizedError("Bad Credentials!");
+
+  // request user from user service
+  const dbUser = await UserService.getUser(email);
+
+  // sign token
+  const token = AuthUtil.signToken(dbUser);
+
+  const resBody = {
+    token,
+    user: dbUser,
+  };
+
+  return res.status(StatusCodes.OK).json(resBody);
+};
+
+module.exports = { register, authorize, login };

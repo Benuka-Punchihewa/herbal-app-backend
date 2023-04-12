@@ -20,4 +20,24 @@ const createUser = async (reqBody) => {
   return response;
 };
 
-module.exports = { createUser };
+const getUser = async (authId) => {
+  const AxiosInstance = CommonUtil.getAxiosInsance(
+    process.env.USER_SERVICE_BASE_URL
+  );
+  const response = await AxiosInstance.get(`/users/auth/${authId}`)
+    .then((res) => {
+      return CommonUtil.buildAxiosResponse(true, res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      return CommonUtil.buildAxiosResponse(
+        false,
+        err.response.data,
+        err.response.status
+      );
+    });
+
+  return response;
+};
+
+module.exports = { createUser, getUser };

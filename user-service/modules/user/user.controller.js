@@ -8,4 +8,10 @@ const createUser = async (req, res) => {
   return res.status(StatusCodes.CREATED).json(dbUser);
 };
 
-module.exports = { createUser };
+const findByAuthId = async (req, res) => {
+  const { authId } = req.params;
+  const dbUser = await UserService.findByAuthId(authId);
+  return res.status(StatusCodes.OK).json(dbUser);
+};
+
+module.exports = { createUser, findByAuthId };

@@ -4,7 +4,7 @@ const authorize = async (reqBody) => {
   const AxiosInstance = CommonUtil.getAxiosInsance(
     process.env.AUTH_SERVICE_BASE_URL
   );
-  const response = await AxiosInstance.post(`/authorization`, reqBody)
+  const response = await AxiosInstance.post(`/auth/authorization`, reqBody)
     .then((res) => {
       return CommonUtil.buildAxiosResponse(true, res.data);
     })

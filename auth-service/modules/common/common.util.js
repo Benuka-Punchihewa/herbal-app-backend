@@ -7,6 +7,7 @@ const ForbiddenError = require("../error/error.classes/ForbiddenError");
 const InternalServerError = require("../error/error.classes/InternalServerError");
 const NotFoundError = require("../error/error.classes/NotFoundError");
 const UnauthorizedError = require("../error/error.classes/UnauthorizedError");
+const constants = require("../../constants");
 
 const connectDB = async (database_url) => {
   mongoose.connect(database_url);
@@ -14,7 +15,7 @@ const connectDB = async (database_url) => {
 
 const getAxiosInsance = (baseURL) => {
   return axios.create({
-    baseURL: baseURL,
+    baseURL: `${baseURL}${constants.API.PREFIX}`,
     headers: {
       Authorization: "Bearer " + process.env.SERVICE_ACCESS_TOKEN,
       "Content-Type": "application/json",

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-gateway-config
+data:
+  auth-service-base-url: http://auth-service:5001
+  user-service-base-url: http://user-service:5002

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Activate Docker Daemon From Minikube"
+eval $(minikube docker-env)
+
 echo "Build Auth-Service Docker Image"
 cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/auth-service
 docker build -t auth-service:1.0 .

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Activate Docker Daemon From Minikube"
+eval $(minikube docker-env)
+
 echo "Removing Kubernetes Deployments"
 kubectl delete -n default deployment auth-deployment
 kubectl delete -n default deployment user-deployment
@@ -14,8 +17,6 @@ echo "Removing Kubernetes ConfigMaps"
 kubectl delete -n default configmap auth-config
 kubectl delete -n default configmap user-config
 kubectl delete -n default configmap api-gateway-config
-
-echo "Activate Docker Daemon From Minikube"
 
 echo "Removing Docker Images"
 docker rmi auth-service:1.0

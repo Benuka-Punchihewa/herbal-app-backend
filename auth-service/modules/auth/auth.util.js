@@ -57,7 +57,7 @@ const authorize = (authHeader, accessRole) => {
       tokenPayload: payload,
       user: undefined,
     };
-    console.log(payload);
+
     // access request from user token
     if (payload.accessRole !== constants.ACCESS.ROLES.SERVICE) {
       // access role validation

@@ -18,4 +18,10 @@ router.get(
   UserController.findByAuthId
 );
 
+router.get(
+  "/:userId",
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.SERVICE]),
+  UserController.findById
+);
+
 module.exports = router;

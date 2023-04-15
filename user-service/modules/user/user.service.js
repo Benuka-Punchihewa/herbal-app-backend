@@ -8,4 +8,8 @@ const findByAuthId = async (authId) => {
   return User.findOne({ auth: authId });
 };
 
-module.exports = { save, findByAuthId };
+const findById = async (userId) => {
+  return User.findById(userId);
+};
+
+module.exports = { save, findByAuthId, findById };

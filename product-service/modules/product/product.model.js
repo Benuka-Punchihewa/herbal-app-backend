@@ -4,7 +4,7 @@ const ProductSchema = mongoose.Schema(
   {
     seller: {
       user: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
       },
       name: {

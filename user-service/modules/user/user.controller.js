@@ -14,4 +14,11 @@ const findByAuthId = async (req, res) => {
   return res.status(StatusCodes.OK).json(dbUser);
 };
 
-module.exports = { createUser, findByAuthId };
+const findById = async (req, res) => {
+  const { userId } = req.params;
+  const dbUser = await UserService.findById(userId);
+  return res.status(StatusCodes.OK).json(dbUser);
+};
+
+
+module.exports = { createUser, findByAuthId, findById };

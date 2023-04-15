@@ -38,7 +38,7 @@ const register = async (req, res) => {
 
 const authorize = async (req, res) => {
   const { authHeader, accessRoles } = req.body;
-  const returnBody = AuthUtil.authorize(authHeader, accessRoles);
+  const returnBody = await AuthUtil.authorize(authHeader, accessRoles);
   return res.status(StatusCodes.OK).json(returnBody);
 };
 
@@ -61,7 +61,7 @@ const login = async (req, res) => {
   if (!passwordCompare) throw new UnauthorizedError("Bad Credentials!");
 
   // request user from user service
-  const dbUser = await UserService.getUser(email);
+  const dbUser = await UserService.getUserByAuthId(email);
 
   // sign token
   const token = AuthUtil.signToken(dbUser);

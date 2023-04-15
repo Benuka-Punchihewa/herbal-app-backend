@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const constants = require("../../constants");
 const UnauthorizedError = require("../error/error.classes/UnauthorizedError");
 const ForbiddenError = require("../error/error.classes/ForbiddenError");
+const UserService = require("../user/user.service");
 
 const signToken = (user) => {
   const maxAge = 30 * 24 * 60 * 60; // 30d
@@ -31,7 +32,7 @@ const extractToken = (bearerToken) => {
   return bearerArr[1];
 };
 
-const authorize = (authHeader, accessRole) => {
+const authorize = async (authHeader, accessRole) => {
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     throw new UnauthorizedError("Authentication invalid!");
   }
@@ -66,7 +67,8 @@ const authorize = (authHeader, accessRole) => {
           `You're unauthorized to access this resource!`
         );
 
-      // TODO: resolve user object
+      const dbUser = await UserService.getUserByUserId(payload._id);
+      returnBody.user = dbUser;
     }
 
     return returnBody;

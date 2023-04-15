@@ -6,6 +6,6 @@ FirebaseAdmin.initializeApp({
   credential: FirebaseAdmin.credential.cert(gCloudServiceAccountCredentials),
 });
 
-export default {
+module.exports = {
   FirebaseAdmin,
 };

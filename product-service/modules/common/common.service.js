@@ -1,4 +1,4 @@
-import FIREBASE_CONFIG from "../../config/firebase.config";
+const FIREBASE_CONFIG = require("../../config/firebase.config");
 
 const storage = FIREBASE_CONFIG.FirebaseAdmin.storage();
 
@@ -42,7 +42,7 @@ const deleteFromFirebaseByPathArr = async (pathArr) => {
   }
 };
 
-export default {
+module.exports = {
   uploadToFirebase,
   deleteFromFirebase,
   deleteFromFirebaseByPathArr,

@@ -24,11 +24,9 @@ const ProductSchema = mongoose.Schema(
     image: {
       mimeType: {
         type: String,
-        required: [true, "Product image is required!"],
       },
       firebaseStorageRef: {
         type: String,
-        required: [true, "Product image is required!"],
       },
     },
     price: {
@@ -40,13 +38,13 @@ const ProductSchema = mongoose.Schema(
       required: [true, "Rating is required!"],
       default: 5,
     },
-    unitAmount: {
-      type: Number,
-      required: [true, "Unit amount is required!"],
-    },
     unit: {
       type: String,
       required: [true, "Unit is required!"],
+    },
+    unitAmount: {
+      type: Number,
+      required: [true, "Unit amount is required!"],
     },
   },
   {

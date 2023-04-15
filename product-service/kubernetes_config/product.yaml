@@ -36,6 +36,11 @@ spec:
                 configMapKeyRef:
                   name: product-config
                   key: auth-service-base-url
+            - name: FIREBASE_STORAGE_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: product-config
+                  key: firebase-storage-bucket
 ---
 apiVersion: v1
 kind: Service

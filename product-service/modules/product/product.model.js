@@ -31,16 +31,6 @@ const ProductSchema = mongoose.Schema(
         required: [true, "Product image is required!"],
       },
     },
-    stock: {
-      level: {
-        type: Number,
-        required: [true, "Stock level is required!"],
-      },
-      minThreashold: {
-        type: Number,
-        required: [true, "Stock threashold is required!"],
-      },
-    },
     price: {
       type: Number,
       required: [true, "Price is required!"],

@@ -32,3 +32,12 @@ cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/api-gateway/kuberne
 kubectl apply -f api-gateway-config.yaml
 kubectl apply -f api-gateway.yaml
 
+echo "Build Product-Service Docker Image"
+cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/product-service
+docker build -t product-service:1.0 .
+
+echo "Deploy Product-Service to Kubernetes Cluster"
+cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/product-service/kubernetes_config
+kubectl apply -f product-config.yaml
+kubectl apply -f product.yaml
+

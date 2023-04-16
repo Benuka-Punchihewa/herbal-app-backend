@@ -15,6 +15,7 @@ const CommonUtil = require("./modules/common/common.util");
 const constants = require("./constants");
 
 // import routes
+const OrderRoutes = require("./modules/order/order.route");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(cors());
 
 // define routes
+app.use(constants.API.PREFIX.concat("/orders"), OrderRoutes);
 
 // not found route
 app.use((req, res, next) => {

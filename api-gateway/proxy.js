@@ -18,12 +18,20 @@ const productProxyOptions = {
   logger: console,
 };
 
+const orderProxyOptions = {
+  target: process.env.ORDER_SERVICE_BASE_URL,
+  changeOrigin: true,
+  logger: console,
+};
+
 const authProxy = createProxyMiddleware(authProxyOptions);
 const userProxy = createProxyMiddleware(userProxyOptions);
 const productProxy = createProxyMiddleware(productProxyOptions);
+const orderProxy = createProxyMiddleware(orderProxyOptions);
 
 module.exports = {
   authProxy,
   userProxy,
   productProxy,
+  orderProxy,
 };

@@ -36,6 +36,11 @@ spec:
                 configMapKeyRef:
                   name: api-gateway-config
                   key: product-service-base-url
+            - name: ORDER_SERVICE_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api-gateway-config
+                  key: order-service-base-url
 ---
 apiVersion: v1
 kind: Service

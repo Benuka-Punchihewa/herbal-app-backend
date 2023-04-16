@@ -32,6 +32,7 @@ cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/api-gateway/kuberne
 kubectl apply -f api-gateway-config.yaml
 kubectl apply -f api-gateway.yaml
 
+
 echo "Build Product-Service Docker Image"
 cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/product-service
 docker build -t product-service:1.0 .
@@ -41,3 +42,12 @@ cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/product-service/kub
 kubectl apply -f product-config.yaml
 kubectl apply -f product.yaml
 
+
+echo "Build Order-Service Docker Image"
+cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/order-service
+docker build -t order-service:1.0 .
+
+echo "Deploy Order-Service to Kubernetes Cluster"
+cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/order-service/kubernetes_config
+kubectl apply -f order-config.yaml
+kubectl apply -f order.yaml

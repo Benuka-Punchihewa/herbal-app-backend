@@ -4,14 +4,21 @@ const Constants = require("../../constants");
 const OrderItemSchema = new mongoose.Schema({
   product: {
     _id: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     name: {
       type: String,
       required: true,
     },
-    image: FirebaseSchema,
+    image: {
+      mimeType: {
+        type: String,
+      },
+      firebaseStorageRef: {
+        type: String,
+      },
+    },
   },
   quantity: {
     type: Number,
@@ -27,13 +34,13 @@ const OrderSchema = new mongoose.Schema(
   {
     user: {
       _id: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
       },
     },
     seller: {
       _id: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
       },
       name: {
@@ -45,6 +52,10 @@ const OrderSchema = new mongoose.Schema(
     serviceCharge: {
       type: Number,
       required: [true, "Service Charge is Required!"],
+    },
+    shippingCharge: {
+      type: Number,
+      required: [true, "Shipping charge is required!"],
     },
     subTotal: {
       type: Number,
@@ -67,10 +78,6 @@ const OrderSchema = new mongoose.Schema(
         type: String,
         required: [true, "Receiver's mobile number is required!"],
       },
-      charges: {
-        type: Number,
-        required: [true, "Shipping charge is required!"],
-      },
     },
     status: {
       type: String,
@@ -85,7 +92,7 @@ const OrderSchema = new mongoose.Schema(
         ],
         message: "Invalid Order Status!",
       },
-      default: OrderConstants.STATUSES.PENDING,
+      default: Constants.STATUSES.PENDING,
     },
   },
   {

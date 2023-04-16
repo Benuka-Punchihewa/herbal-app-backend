@@ -12,4 +12,11 @@ router.post(
   OrderController.processCart
 );
 
+// create order
+router.post(
+  "/",
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.CUSTOMER]),
+  OrderController.createOrder
+);
+
 module.exports = router;

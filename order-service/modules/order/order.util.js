@@ -59,6 +59,7 @@ const processCart = async (sellerId, deliveryService, cartItems) => {
   const total = subTotal + shippingCost + serviceCharge;
 
   return {
+    seller: dbUser,
     items: orderItems,
     subTotal,
     shippingCost,

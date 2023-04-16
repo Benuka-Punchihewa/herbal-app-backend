@@ -36,6 +36,16 @@ spec:
                 configMapKeyRef:
                   name: order-config
                   key: auth-service-base-url
+            - name: USER_SERVICE_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: order-config
+                  key: user-service-base-url
+            - name: PRODUCT_SERVICE_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: order-config
+                  key: product-service-base-url
 ---
 apiVersion: v1
 kind: Service

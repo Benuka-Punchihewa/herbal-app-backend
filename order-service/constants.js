@@ -11,6 +11,13 @@ const constants = {
       SERVICE: "service",
     },
   },
+  USER: {
+    ROLES: {
+      ADMIN: "admin",
+      SELLER: "seller",
+      CUSTOMER: "customer",
+    },
+  },
   STATUSES: {
     PENDING: "pending",
     PAID: "paid",

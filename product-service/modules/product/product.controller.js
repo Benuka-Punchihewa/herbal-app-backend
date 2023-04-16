@@ -56,6 +56,13 @@ const createProduct = async (req, res) => {
   return res.status(StatusCodes.CREATED).json(dbUpdatedProduct);
 };
 
+const findById = async (req, res) => {
+  const { productId } = req.params;
+  const dbProduct = await ProductService.findById(productId);
+  return res.status(StatusCodes.OK).json(dbProduct);
+};
+
 module.exports = {
   createProduct,
+  findById,
 };

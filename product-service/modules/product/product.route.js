@@ -14,4 +14,11 @@ router.post(
   ProductController.createProduct
 );
 
+// get product
+router.get(
+  "/:productId",
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.SERVICE]),
+  ProductController.findById
+);
+
 module.exports = router;

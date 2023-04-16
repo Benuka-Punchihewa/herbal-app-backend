@@ -7,3 +7,4 @@ data:
   user-service-base-url: http://user-service:5002
   product-service-base-url: http://product-service:5003
   order-service-base-url: http://order-service:5004
+  payment-service-base-url: http://payment-service:5005

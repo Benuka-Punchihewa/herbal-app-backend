@@ -1,7 +1,8 @@
 const { StatusCodes } = require("http-status-codes");
 const OrderUtil = require("./order.util");
 const Order = require("./order.model");
-const OrderService = require('./order.service')
+const OrderService = require("./order.service");
+const NotFoundError = require("../error/error.classes/NotFoundError");
 
 const processCart = async (req, res) => {
   const { sellerId, deliveryService, cartItems } = req.body;
@@ -44,4 +45,23 @@ const createOrder = async (req, res) => {
   return res.status(StatusCodes.CREATED).json(dbOrder);
 };
 
-module.exports = { processCart, createOrder };
+const getById = async (req, res) => {
+  const { orderId } = req.params;
+  const dbOrder = await OrderService.findById(orderId);
+  if (!dbOrder) throw new NotFoundError("Order not found!");
+  return res.status(StatusCodes.OK).json(dbOrder);
+};
+
+const updateOrderStatus = async (req, res) => {
+  const { orderId } = req.params;
+  const { status } = req.body;
+  const dbOrder = await OrderService.findById(orderId);
+  if (!dbOrder) throw new NotFoundError("Order not found!");
+
+  dbOrder.status = status;
+  const dbUpdatedOrder = await OrderService.save(dbOrder);
+
+  return res.status(StatusCodes.OK).json(dbUpdatedOrder);
+};
+
+module.exports = { processCart, createOrder, getById, updateOrderStatus };

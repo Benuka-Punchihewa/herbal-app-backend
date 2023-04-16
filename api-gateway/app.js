@@ -13,7 +13,13 @@ const NotFoundError = require("./modules/error/error.classes/NotFoundError");
 const constants = require("./constants");
 
 // import proxies
-const { authProxy, userProxy, productProxy, orderProxy } = require("./proxy");
+const {
+  authProxy,
+  userProxy,
+  productProxy,
+  orderProxy,
+  paymentProxy,
+} = require("./proxy");
 
 const app = express();
 
@@ -24,6 +30,7 @@ app.use(constants.API.PREFIX.concat("/auth"), authProxy);
 app.use(constants.API.PREFIX.concat("/users"), userProxy);
 app.use(constants.API.PREFIX.concat("/products"), productProxy);
 app.use(constants.API.PREFIX.concat("/orders"), orderProxy);
+app.use(constants.API.PREFIX.concat("/payments"), paymentProxy);
 
 // not found route
 app.use((req, res, next) => {

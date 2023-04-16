@@ -11,6 +11,19 @@ const constants = {
       SERVICE: "service",
     },
   },
+  PAYMENT_CURRENCY: "LKR",
+  STRIPE_PAYMENT_STATUSES: {
+    PAID: "paid",
+  },
+  ORDER: {
+    STATUSES: {
+      PENDING: "pending",
+      PAID: "paid",
+      CONFIRMED: "confirmed",
+      DISPATCHED: "dispatched",
+      DELEVERED: "delivered",
+    },
+  },
 };
 
 module.exports = constants;

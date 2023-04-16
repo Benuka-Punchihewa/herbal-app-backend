@@ -19,4 +19,18 @@ router.post(
   OrderController.createOrder
 );
 
+// get order by id
+router.get(
+  "/:orderId",
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.SERVICE]),
+  OrderController.getById
+);
+
+// update order status
+router.patch(
+  "/:orderId/status",
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.SERVICE]),
+  OrderController.updateOrderStatus
+);
+
 module.exports = router;

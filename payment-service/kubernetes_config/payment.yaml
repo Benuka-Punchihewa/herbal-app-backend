@@ -31,6 +31,26 @@ spec:
                 configMapKeyRef:
                   name: payment-config
                   key: auth-service-base-url
+            - name: ORDER_SERVICE_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: payment-config
+                  key: order-service-base-url
+            - name: STRIPE_SECRET_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: payment-config
+                  key: stripe-secret-key
+            - name: STRIPE_WEBHOOK_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: payment-config
+                  key: stripe-webhook-secret
+            - name: FRONTEND_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: payment-config
+                  key: frontend-base-url
 ---
 apiVersion: v1
 kind: Service

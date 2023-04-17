@@ -23,7 +23,7 @@ const constants = {
     PAID: "paid",
     CONFIRMED: "confirmed",
     DISPATCHED: "dispatched",
-    DELEVERED: "delivered",
+    DELIVERED: "delivered",
   },
 };
 

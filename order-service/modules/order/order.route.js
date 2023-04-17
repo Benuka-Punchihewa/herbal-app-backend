@@ -33,4 +33,11 @@ router.patch(
   OrderController.updateOrderStatus
 );
 
+// confirm order
+router.patch(
+  "/:orderId/confirm",
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.ADMIN]),
+  OrderController.confirmOrder
+);
+
 module.exports = router;

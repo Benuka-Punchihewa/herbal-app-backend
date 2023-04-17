@@ -21,4 +21,16 @@ router.get(
   ProductController.findById
 );
 
+// get paginated products
+router.get(
+  "/",
+  CommonMiddleware.paginate,
+  AuthMiddleware.authorize([
+    constants.ACCESS.ROLES.CUSTOMER,
+    constants.ACCESS.ROLES.ADMIN,
+    constants.ACCESS.ROLES.SELLER,
+  ]),
+  ProductController.getProductsPaginated
+);
+
 module.exports = router;

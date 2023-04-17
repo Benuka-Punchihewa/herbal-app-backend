@@ -88,10 +88,28 @@ const confirmOrder = async (req, res) => {
   return res.status(StatusCodes.OK).json(dbUpdatedOrder);
 };
 
+const getPaginatedOrders = async (req, res) => {
+  const pageable = req.pageable;
+  const dbOrders = await OrderService.findPaginatedOrders(pageable);
+  return res.status(StatusCodes.OK).json(dbOrders);
+};
+
+const getPaginatedSelfOrders = async (req, res) => {
+  const pageable = req.pageable;
+  const auth = req.auth;
+  const dbOrders = await OrderService.findPaginatedOrdersByUserId(
+    auth.user._id,
+    pageable
+  );
+  return res.status(StatusCodes.OK).json(dbOrders);
+};
+
 module.exports = {
   processCart,
   createOrder,
   getById,
   updateOrderStatus,
   confirmOrder,
+  getPaginatedOrders,
+  getPaginatedSelfOrders,
 };

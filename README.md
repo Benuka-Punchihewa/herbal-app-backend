@@ -22,5 +22,5 @@
 2. Run `./cleanup.sh` to delete deployments, services, configs from Kubernetes Cluster and remove Docker images from Minikube docker environment.
 
 ### Accessing the services
-#### After a successful deployment, API gateway is accessible at *\<Minikube IP Addr\>:30100*
-#### Minikube IP can be accessed by running `minikube ip` command in a terminal.
+After a successful deployment, API gateway is accessible at *\<Minikube IP Addr\>:30100*  
+Minikube IP can be accessed by running `minikube ip` command in a terminal.

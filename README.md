@@ -12,7 +12,7 @@
 2. Open deploy.sh and cleanup.sh in a test editor
 3. Update paths of Dockerfiles and Kubernetes configuration files properly in both shell scripts (deploy.sh and cleanup.sh)
 4. Open terminal in the app's root directory
-5. Enable execution permissions for deploy.sh and cleanup.sh
+5. Enable execution permissions for deploy.sh and cleanup.sh by running `chmod +x ./deploy.sh` & `chmod +x ./cleanup.sh`
 6. Run `./deploy.sh` to build Docker images and deploy them to Kubernetes Cluster.
 7. Run `./cleanup.sh` to delete deployments, services, configs from Kubernetes Cluster and remove Docker images from Minikube docker environment.
 

@@ -5,6 +5,7 @@ const OrderService = require("./order.service");
 const NotFoundError = require("../error/error.classes/NotFoundError");
 const constants = require("../../constants");
 const BadRequestError = require("../error/error.classes/BadRequestError");
+const ForbiddenError = require("../error/error.classes/ForbiddenError");
 
 const processCart = async (req, res) => {
   const { sellerId, deliveryService, cartItems } = req.body;
@@ -48,9 +49,19 @@ const createOrder = async (req, res) => {
 };
 
 const getById = async (req, res) => {
+  const auth = req.auth;
   const { orderId } = req.params;
+
   const dbOrder = await OrderService.findById(orderId);
   if (!dbOrder) throw new NotFoundError("Order not found!");
+
+  // validate authority
+  if (
+    auth.tokenPayload.accessRole !== constants.ACCESS.ROLES.SERVICE &&
+    dbOrder.user._id.toString() !== auth.user._id.toString()
+  )
+    throw new ForbiddenError("You're unauthorized to access this resource!");
+
   return res.status(StatusCodes.OK).json(dbOrder);
 };
 

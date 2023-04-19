@@ -23,7 +23,12 @@ router.post(
 // get order by id
 router.get(
   "/:orderId",
-  AuthMiddleware.authorize([constants.ACCESS.ROLES.SERVICE]),
+  AuthMiddleware.authorize([
+    constants.ACCESS.ROLES.SERVICE,
+    constants.ACCESS.ROLES.CUSTOMER,
+    constants.ACCESS.ROLES.SELLER,
+    constants.ACCESS.ROLES.ADMIN,
+  ]),
   OrderController.getById
 );
 

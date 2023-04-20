@@ -42,9 +42,7 @@ const processCart = async (sellerId, deliveryService, cartItems) => {
 
     const orderItem = {
       product: {
-        _id: dbProduct._id,
-        name: dbProduct.name,
-        image: dbProduct.image,
+        ...dbProduct,
       },
       quantity: cartItem.quantity,
       total: itemTotalPrice,

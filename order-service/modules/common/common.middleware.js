@@ -1,12 +1,4 @@
-const multer = require("multer");
 const BadRequestError = require("../error/error.classes/BadRequestError");
-
-const uploader = multer({
-  storage: multer.memoryStorage(),
-  limits: {
-    fileSize: 5 * 1024 * 1024, // limit files size to 5 MB
-  },
-});
 
 const paginate = async (req, res, next) => {
   let page = req.query.page || 1;
@@ -28,4 +20,4 @@ const paginate = async (req, res, next) => {
   next();
 };
 
-module.exports = { uploader, paginate };
+module.exports = { paginate };

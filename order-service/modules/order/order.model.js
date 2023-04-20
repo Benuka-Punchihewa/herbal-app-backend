@@ -11,6 +11,18 @@ const OrderItemSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
+    unit: {
+      type: String,
+      required: true,
+    },
+    unitAmount: {
+      type: Number,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
     image: {
       mimeType: {
         type: String,
@@ -88,7 +100,7 @@ const OrderSchema = new mongoose.Schema(
           Constants.STATUSES.PAID,
           Constants.STATUSES.CONFIRMED,
           Constants.STATUSES.DISPATCHED,
-          Constants.STATUSES.DELEVERED,
+          Constants.STATUSES.DELIVERED,
         ],
         message: "Invalid Order Status!",
       },

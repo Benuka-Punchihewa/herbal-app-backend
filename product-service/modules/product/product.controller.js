@@ -62,7 +62,14 @@ const findById = async (req, res) => {
   return res.status(StatusCodes.OK).json(dbProduct);
 };
 
+const getProductsPaginated = async (req, res) => {
+  const pageable = req.pageable;
+  const dbProducts = await ProductService.findPaginatedProducts(pageable);
+  return res.status(StatusCodes.OK).json(dbProducts);
+};
+
 module.exports = {
   createProduct,
   findById,
+  getProductsPaginated,
 };

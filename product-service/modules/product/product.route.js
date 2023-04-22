@@ -17,7 +17,7 @@ router.post(
 // get product
 router.get(
   "/:productId",
-  AuthMiddleware.authorize([constants.ACCESS.ROLES.SERVICE]),
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.CUSTOMER]),
   ProductController.findById
 );
 

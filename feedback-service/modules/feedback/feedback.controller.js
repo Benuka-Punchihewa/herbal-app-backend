@@ -13,6 +13,7 @@ const createFeedback = async (req, res) => {
   const feedback = new Feedback({
     user: {
       _id: auth.user._id,
+      name: auth.user.name,
     },
     seller: {
       _id: sellerId,

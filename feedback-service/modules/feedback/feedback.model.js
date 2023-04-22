@@ -7,6 +7,10 @@ const FeedbackSchema = mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         required: true,
       },
+      name: {
+        type: String,
+        required: true,
+      },
     },
     seller: {
       _id: {

@@ -8,3 +8,4 @@ data:
   product-service-base-url: http://product-service:5003
   order-service-base-url: http://order-service:5004
   payment-service-base-url: http://payment-service:5005
+  feedback-service-base-url: http://payment-service:5006

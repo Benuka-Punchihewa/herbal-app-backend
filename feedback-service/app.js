@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+require("express-async-errors");
 
 // import middleware
 const errorHandlerMiddleware = require("./modules/error/error.middleware");
@@ -10,29 +11,19 @@ const errorHandlerMiddleware = require("./modules/error/error.middleware");
 const NotFoundError = require("./modules/error/error.classes/NotFoundError");
 
 // import configs
+const CommonUtil = require("./modules/common/common.util");
 const constants = require("./constants");
 
-// import proxies
-const {
-  authProxy,
-  userProxy,
-  productProxy,
-  orderProxy,
-  paymentProxy,
-  feedbackProxy,
-} = require("./proxy");
+// import routes
+const FeedbackRoutes = require("./modules/feedback/feedback.route");
 
 const app = express();
 
+app.use(express.json());
 app.use(cors());
 
-// import routes
-app.use(constants.API.PREFIX.concat("/auth"), authProxy);
-app.use(constants.API.PREFIX.concat("/users"), userProxy);
-app.use(constants.API.PREFIX.concat("/products"), productProxy);
-app.use(constants.API.PREFIX.concat("/orders"), orderProxy);
-app.use(constants.API.PREFIX.concat("/payments"), paymentProxy);
-app.use(constants.API.PREFIX.concat("/feedback"), feedbackProxy);
+// define routes
+app.use(constants.API.PREFIX.concat("/feedback"), FeedbackRoutes);
 
 // not found route
 app.use((req, res, next) => {
@@ -48,6 +39,7 @@ app.use(errorHandlerMiddleware);
 const start = async () => {
   const port = process.env.PORT || constants.PORT;
   try {
+    await CommonUtil.connectDB(process.env.MONGO_URL);
     app.listen(port, () => {
       console.log(`SERVER IS LISTENING ON PORT ${port}...`);
     });

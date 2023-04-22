@@ -61,3 +61,13 @@ echo "Deploy Payment-Service to Kubernetes Cluster"
 cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/payment-service/kubernetes_config
 kubectl apply -f payment-config.yaml
 kubectl apply -f payment.yaml
+
+echo "Build Feedback-Service Docker Image"
+cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/feedback-service
+docker build -t feedback-service:1.0 .
+
+echo "Deploy Feedback-Service to Kubernetes Cluster"
+cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/feedback-service/kubernetes_config
+kubectl apply -f feedback-config.yaml
+kubectl apply -f feedback.yaml
+

@@ -18,7 +18,7 @@ router.get(
 );
 
 router.delete(
-  "/:productId/:id",
+  "/:id",
   AuthMiddleware.authorize([constants.ACCESS.ROLES.CUSTOMER]),
   FeedbackController.deleteFeedback
 );

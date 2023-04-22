@@ -12,11 +12,6 @@ const FeedbackSchema = mongoose.Schema(
         required: true,
       },
     },
-    seller: {
-      _id: {
-        type: mongoose.Schema.Types.ObjectId,
-      },
-    },
     product: {
       _id: {
         type: mongoose.Schema.Types.ObjectId,

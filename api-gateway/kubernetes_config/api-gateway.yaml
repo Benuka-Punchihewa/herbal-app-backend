@@ -46,6 +46,11 @@ spec:
                 configMapKeyRef:
                   name: api-gateway-config
                   key: payment-service-base-url
+            - name: FEEDBACK_SERVICE_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api-gateway-config
+                  key: feedback-service-base-url
 ---
 apiVersion: v1
 kind: Service

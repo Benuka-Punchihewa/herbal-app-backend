@@ -31,7 +31,7 @@ const paymentProxyOptions = {
 };
 
 const FeedbackProxyOptions = {
-  target: process.env.Feedback_SERVICE_BASE_URL,
+  target: process.env.FEEDBACK_SERVICE_BASE_URL,
   changeOrigin: true,
   logger: console,
 };

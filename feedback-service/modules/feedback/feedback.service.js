@@ -4,26 +4,20 @@ const save = async (Feedback) => {
   return Feedback.save();
 };
 
-const find = async () => {
-  return Feedback.find();
+const find = async (queryObj) => {
+  return Feedback.find(queryObj);
 };
 
 const findById = async (id) => {
   return Feedback.findById(id);
 };
 
-const remove = async () => {
-  return Feedback.remove();
-};
-
-
-const deleteOne = async (feedbackId) => {
-  return Feedback.deleteOne(feedbackId);
+const deleteOne = async (queryObj) => {
+  return Feedback.findOneAndDelete(queryObj);
 };
 module.exports = {
   save,
   find,
-  remove,
   findById,
   deleteOne,
 };

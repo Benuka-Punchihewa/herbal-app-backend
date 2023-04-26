@@ -30,6 +30,8 @@ const createOrder = async (req, res) => {
   const order = new Order({
     user: {
       _id: auth.user._id,
+      name: auth.user.name,
+      auth: auth.user.auth,
     },
     seller: {
       _id: processCartResult.seller._id,

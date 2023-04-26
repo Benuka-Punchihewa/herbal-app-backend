@@ -8,7 +8,7 @@ const router = express.Router();
 // send email
 router.post(
   "/",
-  //   AuthMiddleware.authorize([constants.ACCESS.ROLES.SERVICE]),
+    AuthMiddleware.authorize([constants.ACCESS.ROLES.SERVICE]),
   EmailController.sendEmail
 );
 

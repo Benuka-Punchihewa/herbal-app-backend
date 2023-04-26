@@ -36,6 +36,11 @@ spec:
                 configMapKeyRef:
                   name: payment-config
                   key: order-service-base-url
+            - name: EMAIL_SERVICE_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: payment-config
+                  key: email-service-base-url
             - name: STRIPE_SECRET_KEY
               valueFrom:
                 configMapKeyRef:

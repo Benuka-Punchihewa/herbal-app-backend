@@ -81,7 +81,7 @@ const createCheckoutSession = async (req, res) => {
       orderId: dbOrder._id.toString(),
     },
     mode: "payment",
-    success_url: `${process.env.FRONTEND_BASE_URL}/my-orders?success=true&orderId=${dbOrder._id}`,
+    success_url: `${process.env.FRONTEND_BASE_URL}/orders/${dbOrder._id}`,
     cancel_url: `${process.env.FRONTEND_BASE_URL}/my-orders?canceled=true&orderId=${dbOrder._id}`,
   });
 
@@ -95,8 +95,8 @@ const handleWebhookEvents = async (req, res) => {
   console.log("Stripe webhook called");
 
   const sig = req.headers["stripe-signature"];
-  console.log(process.env.STRIPE_WEBHOOK_SECRET, sig);
   let event;
+
   try {
     event = stripe.webhooks.constructEvent(
       req.body,

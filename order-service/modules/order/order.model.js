@@ -49,6 +49,14 @@ const OrderSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         required: true,
       },
+      name: {
+        type: String,
+        required: true,
+      },
+      auth: {
+        type: String,
+        required: true
+      }
     },
     seller: {
       _id: {

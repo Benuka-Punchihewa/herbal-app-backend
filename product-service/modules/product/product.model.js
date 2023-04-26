@@ -46,6 +46,11 @@ const ProductSchema = mongoose.Schema(
       type: Number,
       required: [true, "Unit amount is required!"],
     },
+    isDisabled: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     versionKey: false,

@@ -1,8 +1,10 @@
 const { StatusCodes } = require("http-status-codes");
 const BadRequestError = require("../error/error.classes/BadRequestError");
+const NotFoundError = require("../error/error.classes/NotFoundError");
 const Product = require("./product.model");
 const ProductService = require("./product.service");
 const CommonService = require("../common/common.service");
+const ForbiddenError = require("../error/error.classes/ForbiddenError");
 
 const createProduct = async (req, res) => {
   const { strigifiedBody } = req.body;
@@ -58,18 +60,47 @@ const createProduct = async (req, res) => {
 
 const findById = async (req, res) => {
   const { productId } = req.params;
-  const dbProduct = await ProductService.findById(productId);
+  const dbProduct = await ProductService.findActiveProductById(productId);
   return res.status(StatusCodes.OK).json(dbProduct);
 };
 
 const getProductsPaginated = async (req, res) => {
   const pageable = req.pageable;
-  const dbProducts = await ProductService.findPaginatedProducts(pageable);
+  const { keyword } = req.query;
+  const dbProducts = await ProductService.findPaginatedActiveProducts(
+    keyword,
+    pageable
+  );
   return res.status(StatusCodes.OK).json(dbProducts);
+};
+
+const updateProduct = async (req, res) => {
+  const { productId } = req.params;
+  const { name, description, price, unit, unitAmount } = req.body;
+  const auth = req.auth;
+
+  console.log(auth);
+
+  // validate product
+  const dbProduct = await ProductService.findById(productId);
+  if (!dbProduct) throw new NotFoundError("Product not found!");
+  if (dbProduct.seller.user.toString() !== auth.user._id.toString())
+    throw new ForbiddenError("You're not authorized to access this resource!");
+
+  if (name) dbProduct.name = name;
+  if (description) dbProduct.description = description;
+  if (price) dbProduct.price = price;
+  if (unit) dbProduct.unit = unit;
+  if (unitAmount) dbProduct.unitAmount = unitAmount;
+
+  const dbUpdatedProduct = await ProductService.save(dbProduct);
+
+  return res.status(StatusCodes.OK).json(dbUpdatedProduct);
 };
 
 module.exports = {
   createProduct,
   findById,
   getProductsPaginated,
+  updateProduct,
 };

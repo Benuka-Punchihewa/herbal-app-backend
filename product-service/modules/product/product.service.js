@@ -8,10 +8,18 @@ const findById = (id) => {
   return Product.findById(id);
 };
 
-const findPaginatedProducts = async (pageableObj) => {
+const findActiveProductById = (id) => {
+  return Product.findOne({ _id: id, isDisabled: false });
+};
+
+const findPaginatedActiveProducts = async (keyword, pageableObj) => {
   const pipeline = [];
 
-  const queryObj = {};
+  if (!keyword) keyword = "";
+  const queryObj = {
+    name: { $regex: keyword, $options: "i" },
+    isDisabled: false,
+  };
 
   pipeline.push({
     $match: queryObj,
@@ -48,5 +56,6 @@ const findPaginatedProducts = async (pageableObj) => {
 module.exports = {
   save,
   findById,
-  findPaginatedProducts,
+  findActiveProductById,
+  findPaginatedActiveProducts,
 };

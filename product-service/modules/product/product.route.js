@@ -33,4 +33,11 @@ router.get(
   ProductController.getProductsPaginated
 );
 
+// update product
+router.patch(
+  "/:productId",
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.SELLER]),
+  ProductController.updateProduct
+);
+
 module.exports = router;

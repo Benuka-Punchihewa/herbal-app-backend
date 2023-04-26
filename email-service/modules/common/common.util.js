@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const axios = require("axios");
 const { StatusCodes } = require("http-status-codes");
 const BadRequestError = require("../error/error.classes/BadRequestError");
@@ -8,10 +7,6 @@ const InternalServerError = require("../error/error.classes/InternalServerError"
 const NotFoundError = require("../error/error.classes/NotFoundError");
 const UnauthorizedError = require("../error/error.classes/UnauthorizedError");
 const constants = require("../../constants");
-
-const connectDB = async (database_url) => {
-  mongoose.connect(database_url);
-};
 
 const getAxiosInsance = (baseURL) => {
   return axios.create({
@@ -46,4 +41,4 @@ const buildAxiosResponse = async (success, data, statusCode) => {
   }
 };
 
-module.exports = { connectDB, getAxiosInsance, buildAxiosResponse };
+module.exports = { getAxiosInsance, buildAxiosResponse };

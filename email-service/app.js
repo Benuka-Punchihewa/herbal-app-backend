@@ -14,6 +14,7 @@ const NotFoundError = require("./modules/error/error.classes/NotFoundError");
 const constants = require("./constants");
 
 // import routes
+const EmailRoutes = require("./modules/email/email.route");
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use(cors());
 
 // define routes
-// app.use(constants.API.PREFIX.concat("/emails"), UserRoutes);
+app.use(constants.API.PREFIX.concat("/emails"), EmailRoutes);
 
 // not found route
 app.use((req, res, next) => {

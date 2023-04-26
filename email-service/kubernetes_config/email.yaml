@@ -31,6 +31,16 @@ spec:
                 configMapKeyRef:
                   name: email-config
                   key: auth-service-base-url
+            - name: ETHEREAL_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: email-config
+                  key: ethereal-username
+            - name: ETHEREAL_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: email-config
+                  key: ethereal-password
 ---
 apiVersion: v1
 kind: Service

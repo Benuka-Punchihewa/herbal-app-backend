@@ -23,16 +23,6 @@ kubectl apply -f user-config.yaml
 kubectl apply -f user.yaml
 
 
-echo "Build API-Gateway-Service Docker Image"
-cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/api-gateway
-docker build -t api-gateway:1.0 .
-
-echo "Deploy API-Gateway-Service to Kubernetes Cluster"
-cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/api-gateway/kubernetes_config
-kubectl apply -f api-gateway-config.yaml
-kubectl apply -f api-gateway.yaml
-
-
 echo "Build Product-Service Docker Image"
 cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/product-service
 docker build -t product-service:1.0 .
@@ -70,4 +60,24 @@ echo "Deploy Feedback-Service to Kubernetes Cluster"
 cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/feedback-service/kubernetes_config
 kubectl apply -f feedback-config.yaml
 kubectl apply -f feedback.yaml
+
+
+echo "Build Email-Service Docker Image"
+cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/email-service
+docker build -t email-service:1.0 .
+
+echo "Deploy Email-Service to Kubernetes Cluster"
+cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/email-service/kubernetes_config
+kubectl apply -f email-config.yaml
+kubectl apply -f email.yaml
+
+
+echo "Build API-Gateway-Service Docker Image"
+cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/api-gateway
+docker build -t api-gateway:1.0 .
+
+echo "Deploy API-Gateway-Service to Kubernetes Cluster"
+cd /home/benuka/Programming/SLIIT/Y3S2/DS/herbal-app-backend/api-gateway/kubernetes_config
+kubectl apply -f api-gateway-config.yaml
+kubectl apply -f api-gateway.yaml
 

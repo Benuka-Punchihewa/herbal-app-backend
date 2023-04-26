@@ -40,4 +40,19 @@ router.patch(
   ProductController.updateProduct
 );
 
+// disable product
+router.delete(
+  "/:productId",
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.SELLER]),
+  ProductController.disableProduct
+);
+
+// get self products
+router.get(
+  "/self/all",
+  CommonMiddleware.paginate,
+  AuthMiddleware.authorize([constants.ACCESS.ROLES.SELLER]),
+  ProductController.getSelfProductsPaginated
+);
+
 module.exports = router;

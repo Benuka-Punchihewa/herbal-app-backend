@@ -5,13 +5,20 @@ const Product = require("./product.model");
 const ProductService = require("./product.service");
 const CommonService = require("../common/common.service");
 const ForbiddenError = require("../error/error.classes/ForbiddenError");
+const constants = require("../../constants");
+const { default: mongoose } = require("mongoose");
 
 const createProduct = async (req, res) => {
   const { strigifiedBody } = req.body;
   const { user } = req.auth;
 
-  // validate image
-  if (!req.file) throw new BadRequestError("Image is Required!");
+  // validate seller
+  if (user.role !== constants.USER.ROLES.SELLER)
+    throw new ForbiddenError("You're not authorized to access this resource!");
+
+  if (!req.file)
+    // validate image
+    throw new BadRequestError("Image is Required!");
 
   // parse strigifiedBody
   let parsedBody;
@@ -79,8 +86,6 @@ const updateProduct = async (req, res) => {
   const { name, description, price, unit, unitAmount } = req.body;
   const auth = req.auth;
 
-  console.log(auth);
-
   // validate product
   const dbProduct = await ProductService.findById(productId);
   if (!dbProduct) throw new NotFoundError("Product not found!");
@@ -98,9 +103,45 @@ const updateProduct = async (req, res) => {
   return res.status(StatusCodes.OK).json(dbUpdatedProduct);
 };
 
+const disableProduct = async (req, res) => {
+  const { productId } = req.params;
+  const auth = req.auth;
+
+  // validate product
+  const dbProduct = await ProductService.findById(productId);
+  if (!dbProduct) throw new NotFoundError("Product not found!");
+  if (dbProduct.seller.user.toString() !== auth.user._id.toString())
+    throw new ForbiddenError("You're not authorized to access this resource!");
+
+  dbProduct.isDisabled = true;
+  const dbUpdatedProduct = await ProductService.save(dbProduct);
+
+  return res.status(StatusCodes.OK).json(dbUpdatedProduct);
+};
+
+const getSelfProductsPaginated = async (req, res) => {
+  const pageable = req.pageable;
+  const { keyword } = req.query;
+  const auth = req.auth;
+
+  // validate seller
+  if (auth.user.role !== constants.USER.ROLES.SELLER)
+    throw new ForbiddenError("You're not authorized to access this resource!");
+
+  const dbProducts = await ProductService.findPaginatedActiveProductsBySellerId(
+    keyword,
+    new mongoose.Types.ObjectId(auth.user._id),
+    pageable
+  );
+
+  return res.status(StatusCodes.OK).json(dbProducts);
+};
+
 module.exports = {
   createProduct,
   findById,
   getProductsPaginated,
   updateProduct,
+  disableProduct,
+  getSelfProductsPaginated,
 };

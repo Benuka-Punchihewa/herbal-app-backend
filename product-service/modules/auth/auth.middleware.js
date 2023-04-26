@@ -8,7 +8,7 @@ const authorize = (accessRoles) => {
       authHeader,
       accessRoles,
     };
-
+    console.log(reqBody);
     const authorizationResponse = await AuthService.authorize(reqBody);
     req.auth = authorizationResponse;
     next();

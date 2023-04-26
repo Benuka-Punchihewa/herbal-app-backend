@@ -32,7 +32,7 @@ const extractToken = (bearerToken) => {
   return bearerArr[1];
 };
 
-const authorize = async (authHeader, accessRole) => {
+const authorize = async (authHeader, accessRoles) => {
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     throw new UnauthorizedError("Authentication invalid!");
   }
@@ -59,12 +59,14 @@ const authorize = async (authHeader, accessRole) => {
       user: undefined,
     };
 
+    console.log(returnBody, accessRoles);
+
     // access request from user token
     if (payload.accessRole !== constants.ACCESS.ROLES.SERVICE) {
       // access role validation
-      if (!accessRole.includes(payload.accessRole))
+      if (!accessRoles.includes(payload.accessRole))
         throw new ForbiddenError(
-          `You're unauthorized to access this resource!`
+          `You're unauthorized to access this resource!!`
         );
 
       const dbUser = await UserService.getUserByUserId(payload._id);

@@ -12,13 +12,18 @@ const findActiveProductById = (id) => {
   return Product.findOne({ _id: id, isDisabled: false });
 };
 
-const findPaginatedActiveProducts = async (keyword, pageableObj) => {
+const findPaginatedActiveProducts = async (
+  keyword,
+  pageableObj,
+  filter = {}
+) => {
   const pipeline = [];
 
   if (!keyword) keyword = "";
   const queryObj = {
     name: { $regex: keyword, $options: "i" },
     isDisabled: false,
+    ...filter,
   };
 
   pipeline.push({
@@ -53,9 +58,20 @@ const findPaginatedActiveProducts = async (keyword, pageableObj) => {
   };
 };
 
+const findPaginatedActiveProductsBySellerId = async (
+  keyword,
+  sellerId,
+  pageableObj
+) => {
+  return findPaginatedActiveProducts(keyword, pageableObj, {
+    "seller.user": sellerId,
+  });
+};
+
 module.exports = {
   save,
   findById,
   findActiveProductById,
   findPaginatedActiveProducts,
+  findPaginatedActiveProductsBySellerId,
 };

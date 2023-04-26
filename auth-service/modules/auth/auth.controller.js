@@ -38,6 +38,7 @@ const register = async (req, res) => {
 
 const authorize = async (req, res) => {
   const { authHeader, accessRoles } = req.body;
+  console.log(req.body);
   const returnBody = await AuthUtil.authorize(authHeader, accessRoles);
   return res.status(StatusCodes.OK).json(returnBody);
 };

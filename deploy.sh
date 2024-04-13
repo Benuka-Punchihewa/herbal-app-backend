@@ -8,6 +8,8 @@ minikube docker-env
 echo "Build Auth-Service Docker Image"
 cd $current_dir/auth-service
 docker build -t auth-service:1.0 .
+docker tag auth-service:1.0 benukapunchihewa/auth-service:1.0
+docker push benukapunchihewa/auth-service:1.0
 
 echo "Deploy Auth-Service to Kubernetes Cluster"
 cd $current_dir/auth-service/kubernetes_config

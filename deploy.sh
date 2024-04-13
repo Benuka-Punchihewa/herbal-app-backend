@@ -6,7 +6,7 @@ eval $(minikube docker-env)
 
 echo "Build Auth-Service Docker Image"
 cd $current_dir/auth-service
-docker build -t auth-service:1.0 .
+docker build -t $(minikube ip):5000/auth-service:1.0 .
 
 echo "Deploy Auth-Service to Kubernetes Cluster"
 cd $current_dir/auth-service/kubernetes_config

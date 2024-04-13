@@ -5,11 +5,11 @@ echo "Activate Docker Daemon From Minikube"
 eval $(minikube docker-env)
 
 echo "Build Auth-Service Docker Image"
-cd $$current_dir/auth-service
+cd $current_dir/auth-service
 docker build -t auth-service:1.0 .
 
 echo "Deploy Auth-Service to Kubernetes Cluster"
-cd $$current_dir/auth-service/kubernetes_config
+cd $current_dir/auth-service/kubernetes_config
 kubectl apply -f auth-config.yaml
 kubectl apply -f auth.yaml
 
